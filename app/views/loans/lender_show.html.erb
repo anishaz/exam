@@ -1,0 +1,70 @@
+<form action='/sessions/<%= session[:user_id] %>' method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <input type="hidden" name="_method" value="delete">
+  <input type="submit" value="Log Out">
+</form>
+
+<h1>Name : <%= @lender.first_name %> <%= @lender.last_name %></h1>
+<h1>Account Balance: $ <%= @lender.money %></h1>
+
+<h1>List of people who are in need of help:</h1>
+<table>
+  <thead>
+    <th>Name</th>
+    <th>Money Needed For</th>
+    <th>Description</th>
+    <th>Amount Needed</th>
+    <th>Amount Raised</th>
+    <th>Action</th>
+  </thead>
+  <tbody>
+    <% @borrowers.each do |borrower| %>
+    <tr>
+      <td><%= borrower.first_name %></td>
+      <td><%= borrower.purpose %></td>
+      <td><%= borrower.description %></td>
+      <td><%= borrower.money %></td>
+      <td><%= borrower.raised %></td>
+      <td><form action='lender/<%= borrower.id %>' method="post">
+        <select name="amount_given">
+        	<option value="10">10</option>
+        	<option value="20">20</option>
+        	<option value="30">30</option>
+        	<option value="40">40</option>
+        	<option value="50">50</option>
+        	<option value="60">60</option>
+        	<option value="70">70</option>
+        	<option value="80">80</option>
+        	<option value="90">90</option>
+        	<option value="100">100</option>
+        </select><br>
+        <input type='submit' value='Lend'>
+      </form></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<h1>List of people you lent money to:</h1>
+<table>
+  <thead>
+    <th>Name</th>
+    <th>Money Needed For</th>
+    <th>Description</th>
+    <th>Amount Needed</th>
+    <th>Amount Raised</th>
+    <th>Amount Lent</th>
+  </thead>
+  <tbody>
+    <% @lent.each do |borrower| %>
+    <tr>
+      <td><%= borrower.first_name %></td>
+      <td><%= borrower.purpose %></td>
+      <td><%= borrower.description %></td>
+      <td><%= borrower.money %></td>
+      <td><%= borrower.raised %></td>
+      <td>Amount Lent Here</td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

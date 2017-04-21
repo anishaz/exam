@@ -1,0 +1,33 @@
+<form action="/sessions/<%= session[:user_id] %>" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <input type="hidden" name="_method" value="delete">
+  <input type="submit" value="Log Out">
+</form>
+
+<h1>Name : <%= @borrower.first_name %> <%= @borrower.last_name %></h1>
+<h1>Amount Needed: $ <%= @borrower.money %></h1>
+<h1>Amount Raised: $
+	<% if @borrower.raised %>
+		<%= @borrower.raised %>
+	<% else %>
+  0
+	<% end %>
+</h1>
+
+<h1>List of people who lent you money:</h1>
+<table>
+  <thead>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Amount Lent</th>
+  </thead>
+  <tbody>
+    <% @lenders.each do |lender| %>
+    <tr>
+      <td><%= lender.name %></td>
+      <td><%= lender.email %></td>
+      <td>Amount Lent Here</td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,13 @@
+<form action="/sessions" method="POST" class="login">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <fieldset>
+    <legend>Login</legend>
+    <label for="email">Email:</label>
+    <input type="email" name="user[email]">
+    <label for="password">Password:</label>
+    <input type="password" name="user[password]">
+    <button>Login</button>
+  </fieldset>
+</form>
+
+<%= link_to 'Click here to register', register_path %>
